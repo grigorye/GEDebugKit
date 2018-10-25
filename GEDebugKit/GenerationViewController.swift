@@ -11,7 +11,11 @@ import UIKit
 extension String {
 	
 	var symbolDisplayName: String {
+        #if CWLDEMANGLE_ENABLED
 		return (try? parseMangledSwiftSymbol(self))?.print(using: SymbolPrintOptions.simplified.union([.displayModuleNames])) ?? self
+        #else
+        return self
+        #endif
 	}
 }
 
