@@ -9,7 +9,9 @@
 import FBAllocationTracker
 import FBMemoryProfiler
 import FPSCounter
+#if LOGGY_ENABLED
 import Loggy
+#endif
 import Foundation
 
 private let debugError = NSError(domain: "com.grigorye.debug", code: 1)
@@ -28,13 +30,11 @@ private var retainedObjects: [AnyObject] = []
 
 private func initializeAllocationTracking() {
     
-	Activity.label("Initializing Allocation Tracking") {
-		guard let allocationTrackerManager = x$(FBAllocationTrackerManager.shared()) else {
-			return
-		}
-		allocationTrackerManager.startTrackingAllocations()
-		allocationTrackerManager.enableGenerations()
-	}
+    guard let allocationTrackerManager = x$(FBAllocationTrackerManager.shared()) else {
+        return
+    }
+    allocationTrackerManager.startTrackingAllocations()
+    allocationTrackerManager.enableGenerations()
 }
 
 public func configureAllocationTracking() {
@@ -96,6 +96,12 @@ public func configureDebug() {
 public func initializeDebug() {
     
     if defaults.allocationTrackingEnabled {
+        #if LOGGY_ENABLED
+        Activity.label("Initializing Allocation Tracking") {
+            initializeAllocationTracking()
+        }
+        #else
         initializeAllocationTracking()
+        #endif
     }
 }
