@@ -22,6 +22,7 @@ Pod::Spec.new do |s|
   s.swift_version = "4.0"
 
   s.source_files  = "GEDebugKit/*.swift"
+  s.resource_bundle = { 'GEDebugKit-Sources' => 'GEDebugKit' }
 
   s.dependency 'GEUIKit'
   s.dependency 'GEFoundation'
