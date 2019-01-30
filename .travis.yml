@@ -4,7 +4,6 @@ cache: bundler
 env:
   matrix:
     - platforms=ios
-    - platforms=macos
 before_install:
   - . Pods/GEContinuousIntegration/travis/before_install
 script:
