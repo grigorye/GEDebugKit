@@ -16,8 +16,8 @@ private func debugOnShake() {
 
 func configureShakeGesture() {
 	
-	typealias ImpBlock = @convention(block) (UIWindow?, UIEvent.UIEvent.EventSubtype, UIEvent?) -> Void
-	typealias Imp = @convention(c) (UIWindow?, Selector, UIEvent.UIEvent.EventSubtype, UIEvent?) -> Void
+	typealias ImpBlock = @convention(block) (UIWindow?, UIEvent.EventSubtype, UIEvent?) -> Void
+	typealias Imp = @convention(c) (UIWindow?, Selector, UIEvent.EventSubtype, UIEvent?) -> Void
 	let sel = #selector(UIWindow.motionEnded(_:with:))
 	let method = class_getInstanceMethod(UIWindow.self, sel)!
 	let oldImp = unsafeBitCast(method_getImplementation(method), to: Imp.self)
